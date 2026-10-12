@@ -11,6 +11,52 @@ tags:
   - name: health
     description: Health operations
 paths:
+  /me:
+    get:
+      operationId: getMe
+      summary: Initialize and retrieve own profile
+      responses:
+        "200":
+          description: Own account
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Profile" }
+    patch:
+      operationId: updateProfile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ProfileInput" }
+      responses:
+        "200":
+          description: Saved profile
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Profile" }
+  /me/preferences:
+    patch:
+      operationId: updatePreferences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PreferencesInput" }
+      responses:
+        "200":
+          description: Saved account
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Profile" }
+  /me/dashboard:
+    get:
+      operationId: getDashboard
+      responses:
+        "200":
+          description: Real personal progress
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Dashboard" }
   /healthz:
     get:
       operationId: healthCheck
@@ -26,6 +72,64 @@ paths:
                 $ref: "#/components/schemas/HealthStatus"
 components:
   schemas:
+    ProfileInput:
+      type: object
+      additionalProperties: false
+      properties:
+        displayName: { type: string, maxLength: 80 }
+        accountType: { type: string, enum: [individual, business, developer] }
+        country: { type: string, maxLength: 80 }
+        timezone: { type: string, maxLength: 80 }
+        language: { type: string, enum: [en, es, fr, de, ar, ur, zh] }
+        description: { type: string, maxLength: 1000 }
+        onboardingStep: { type: integer, minimum: 0, maximum: 3 }
+        onboardingCompleted: { type: boolean }
+    Widgets:
+      type: object
+      additionalProperties: false
+      required: [account, checklist, network]
+      properties:
+        account: { type: boolean }
+        checklist: { type: boolean }
+        network: { type: boolean }
+    PreferencesInput:
+      type: object
+      additionalProperties: false
+      properties:
+        theme: { type: string, enum: [dark, light] }
+        widgets: { $ref: "#/components/schemas/Widgets" }
+    Profile:
+      type: object
+      required: [id, displayName, accountType, country, timezone, language, description, onboardingStep, onboardingCompleted, theme, widgets, createdAt]
+      properties:
+        id: { type: string }
+        displayName: { type: string }
+        accountType: { type: string, enum: [individual, business, developer] }
+        country: { type: string }
+        timezone: { type: string }
+        language: { type: string, enum: [en, es, fr, de, ar, ur, zh] }
+        description: { type: string }
+        onboardingStep: { type: integer }
+        onboardingCompleted: { type: boolean }
+        theme: { type: string, enum: [dark, light] }
+        widgets: { $ref: "#/components/schemas/Widgets" }
+        createdAt: { type: string }
+    ChecklistItem:
+      type: object
+      required: [id, label, completed, href]
+      properties:
+        id: { type: string }
+        label: { type: string }
+        completed: { type: boolean }
+        href: { type: string }
+    Dashboard:
+      type: object
+      required: [profileCompletion, checklist]
+      properties:
+        profileCompletion: { type: integer }
+        checklist:
+          type: array
+          items: { $ref: "#/components/schemas/ChecklistItem" }
     HealthStatus:
       type: object
       properties:

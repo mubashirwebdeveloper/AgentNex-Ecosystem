@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "AGENTNEX"
+description = "The Global Network for AI Agents, Businesses & People. Phase 1 public website, secure identity, onboarding, and personal dashboard."
+version = "1.0.0"
+id = "artifacts/agentnex"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25850
+
+[services.development]
+run = "pnpm --filter @workspace/agentnex run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/agentnex", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/agentnex/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25850"
+BASE_PATH = "/"

@@ -1,0 +1,477 @@
+# AGENTNEX — PROMPT 1
+## Master Foundation, Premium Global Network Experience & Production-Ready Architecture
+
+You are an expert team consisting of a principal software architect, senior full-stack developer, SaaS product designer, UI/UX specialist, database engineer, accessibility specialist, and QA engineer.
+
+Build a BRAND-NEW web application named **AGENTNEX** in this fresh Replit project.
+
+This is Phase 1 of a much larger development roadmap. We will add advanced capabilities in separate numbered prompts. Your responsibility is to build an exceptional foundation that supports those later phases without forcing a complete rewrite.
+
+**Project name:** AGENTNEX
+
+**Tagline:** The Global Network for AI Agents, Businesses & People
+
+**Product mission:** Create a trusted global digital infrastructure where individuals, companies, AI agents, suppliers, developers, and organizations can establish identities, discover one another, collaborate, automate workflows, and conduct permission-controlled business activities.
+
+The attached design image is the primary visual direction. Study its styling, navigation, hierarchy, dashboard composition, global network aesthetic, and product modules.
+
+IMPORTANT: The image represents the long-term product vision, not the functional scope of Prompt 1. Do not fabricate functionality, platform activity, statistics, customers, business listings, payments, or AI results to make the interface appear complete.
+
+---
+
+# 1. FUNDAMENTAL DEVELOPMENT RULES
+
+1. This is a new application. Establish a clean architecture from the beginning.
+2. Build real, working functionality for the features specifically assigned to Prompt 1.
+3. Do not create decorative buttons pretending to work.
+4. Do not use fake statistics or mock database records in the authenticated product.
+5. Do not hardcode sensitive credentials or API secrets.
+6. Do not implement incomplete AI functions that pretend to execute real AI tasks.
+7. Separate frontend, backend, database, authentication, business logic, and reusable components cleanly.
+8. All database operations must be associated with the correct authenticated user.
+9. Handle loading, errors, empty states, and network failures.
+10. All interfaces must work responsively on desktop, tablet, and mobile.
+11. Add meaningful automated tests, run them, and report their results.
+12. Preserve the architecture for future phases.
+13. Do not implement later-phase features superficially just to make the application look finished.
+14. Keep the interface premium, fast, accessible, and professional.
+15. Favor correct, maintainable implementation over unnecessary visual complexity.
+
+# 2. TECHNOLOGY FOUNDATION
+
+Preferred stack:
+
+- Next.js with App Router
+- TypeScript in strict mode
+- Tailwind CSS
+- shadcn/ui or equivalent accessible reusable components
+- PostgreSQL
+- Prisma ORM or Drizzle ORM
+- Zod for input validation
+- A secure authentication solution supported by the Replit environment
+- Lucide icons
+- Framer Motion / Motion for purposeful animations
+- React Three Fiber or a lightweight Canvas/SVG solution only where appropriate for the global network visualization
+
+Choose a coherent set of versions that work together in the current Replit environment.
+
+If a preferred dependency conflicts with Replit deployment support, select the most compatible alternative and explain the decision.
+
+Do not mix several unrelated backend stacks.
+
+Create a maintainable folder structure with clear feature boundaries for:
+
+- Public website
+- Authentication
+- User profiles
+- Dashboard
+- Organizations
+- Agents
+- Trust and verification
+- Business Network
+- Marketplace
+- Workflows
+- Procurement
+- Developer Platform
+- Billing
+- Administration
+- Shared UI components
+- Backend services
+- Database models
+- Validation and permissions
+- Testing
+
+Later modules should begin as clean extension points, not unfinished simulations.
+
+# 3. DESIGN SYSTEM — PREMIUM AGENTNEX
+
+Create a visually distinctive product with the quality of a leading international enterprise SaaS platform.
+
+Primary design direction:
+
+- Deep midnight navy backgrounds
+- Rich dark blue interface surfaces
+- Electric blue and cyan highlights
+- Carefully controlled orange accents
+- Neutral text with excellent readability
+- Elegant borders and soft shadows
+- Restrained glowing effects
+- Premium typography
+- Consistent spacing
+- Professional cards, navigation, icons, and forms
+
+The visual identity should be consistent across the marketing website and authenticated dashboard.
+
+Use CSS design tokens for typography, color, spacing, border radius, shadows, and animation timing.
+
+Build reusable components for:
+
+- Navigation
+- Buttons
+- Cards
+- Modals
+- Drawers
+- Tables
+- Forms
+- Tabs
+- Dropdowns
+- Search fields
+- Tooltips
+- Notifications
+- Loading skeletons
+- Empty states
+- Error messages
+- Page headings
+- Breadcrumbs
+
+Support both dark and light themes. The dark theme should follow the supplied reference and be the initial presentation.
+
+The theme toggle must work and the preference must persist.
+
+Animations must respect `prefers-reduced-motion`.
+
+# 4. PREMIUM PUBLIC LANDING PAGE
+
+Build a COMPLETE and RESPONSIVE landing page, not a generic starter template.
+
+## Header
+
+Include:
+
+- AGENTNEX logo and brand name
+- Product
+- Global Network
+- Solutions
+- Marketplace
+- Developers
+- Pricing
+- Login
+- Get Started
+
+The navigation must work.
+
+Product sections that are not live yet may link to truthful explanatory pages or roadmap sections, rather than broken product routes.
+
+## Hero Section
+
+Main headline:
+
+**The Global Network for AI Agents, Businesses & People**
+
+Supporting message:
+
+"Connect. Collaborate. Automate. Grow."
+
+Create polished supporting copy explaining the long-term AGENTNEX vision.
+
+Include meaningful calls to action:
+
+- Get Started
+- Explore the Network
+
+Get Started must open the real authentication/onboarding flow.
+
+Explore the Network must open a real product explanation or visualization page, not an invented live directory.
+
+## Interactive Global Network Visual
+
+Build a distinctive visual centerpiece inspired by the attached image.
+
+It should show a glowing globe or world network with visually connected categories:
+
+- Humans
+- Businesses
+- AI Agents
+- Suppliers
+- Developers
+- Opportunities
+
+Requirements:
+
+- Elegant animations
+- Responsive rendering
+- Accessible explanatory fallback
+- Performance-conscious implementation
+- Interactive category selection where useful
+- No fabricated live activity or false network statistics
+- A clear indication that the illustration explains the future AGENTNEX ecosystem
+
+Prioritize a high-quality, stable implementation over an unnecessarily heavy 3D model.
+
+## Additional Landing Page Sections
+
+Create substantial and visually polished sections for:
+
+1. What is AGENTNEX?
+2. How the global network works
+3. Connected global ecosystem
+4. AI Agent Passport vision
+5. Trust, identity, and verification
+6. Business networking and collaboration
+7. AI Agent Marketplace vision
+8. Workflow automation vision
+9. Procurement and supplier collaboration
+10. Developer Platform and APIs
+11. Security and governance principles
+12. Pricing overview with clearly labeled proposed or future offerings
+13. Frequently asked questions
+14. Final call-to-action
+15. Full professional footer
+
+Use original, relevant copy. Avoid exaggerated claims, misleading guarantees, or claims about existing customers or functionality that have not been demonstrated.
+
+# 5. AUTHENTICATION AND USER ACCOUNTS
+
+Implement secure, real authentication using an appropriate provider supported on Replit.
+
+Required:
+
+- Account registration/login
+- Authenticated sessions
+- Logout
+- Protected application routes
+- User profile creation
+- Reliable account recovery or provider-managed recovery where supported
+- Server-side authentication checks
+- Correct handling of expired or missing sessions
+- Error handling
+- No duplicate account records
+
+If a provider requires unavailable credentials, stop the affected integration at an honest configuration boundary. Explain exactly what credentials are needed instead of creating fake authentication.
+
+Ensure repeated login does not cause duplicate database errors.
+
+# 6. FIRST-TIME USER ONBOARDING
+
+After a user creates an account, guide them through a working onboarding experience.
+
+Initial onboarding fields:
+
+- Display name
+- Account type: Individual, Business Representative, or Developer
+- Country
+- Timezone
+- Preferred language
+- Optional professional description
+
+Save validated data to the database.
+
+Users must be able to resume onboarding, update their profile, and avoid losing completed steps on refresh.
+
+Do not require an organization to exist before a personal account can access its dashboard.
+
+Full organization membership and RBAC will be implemented in Prompt 2.
+
+# 7. WORKING DASHBOARD FOUNDATION
+
+Create a premium authenticated dashboard that follows the design reference.
+
+## Main Layout
+
+Desktop:
+
+- Professional collapsible sidebar
+- Top navigation bar
+- Global search entry point
+- Notifications entry
+- Profile menu
+- Main workspace content
+
+Mobile:
+
+- Functional sidebar drawer
+- Responsive cards
+- Usable navigation
+- Accessible controls
+
+## Sidebar Architecture
+
+Include appropriately labeled destinations for:
+
+- Overview
+- My Profile
+- Organizations
+- Global Network
+- AI Agents
+- Agent Marketplace
+- Business Network
+- Procurement
+- Workflows
+- Agent-to-Agent Network
+- Developer Platform
+- Billing
+- Settings
+
+Only fully implemented Phase 1 destinations should behave as active product features.
+
+For future features, use a polished "Coming in a later phase" screen with a truthful explanation. Do not fake operational screens or actions.
+
+## Dashboard Overview
+
+Implement:
+
+- Personalized welcome header
+- Real account information
+- Onboarding progress
+- Profile completion indicator
+- Getting Started checklist
+- Account settings shortcut
+- Interactive global network concept panel
+- Customizable dashboard widget visibility
+- Useful next-step guidance
+
+The dashboard must load correctly even when the user has no organization, agents, connections, or activity.
+
+Do not invent usage metrics or network activity.
+
+If metrics are displayed, derive them from actual database data. Otherwise show clear empty states.
+
+Widget preferences must be saved and persist after refresh.
+
+# 8. USER PROFILE AND SETTINGS
+
+Build working profile and settings pages.
+
+Users must be able to:
+
+- View their profile
+- Edit supported profile fields
+- Save their changes
+- Change theme
+- Update language preference
+- Update timezone
+- View basic account information
+- Log out
+
+Validate all updates and enforce ownership on the server.
+
+Show accurate save, error, and loading states.
+
+# 9. DATABASE FOUNDATION
+
+Set up a real PostgreSQL database with migrations.
+
+For this phase, implement the minimum reliable schema for:
+
+- Users / user profiles
+- Authentication-related account identifiers or provider mappings
+- User preferences
+- Onboarding progress
+- Widget configuration
+
+Prepare documented schema-extension conventions for future:
+
+- Organizations and memberships
+- AI Agent identities and passports
+- Agent permissions and capabilities
+- Trust and verification
+- Business connections
+- RFQs and quotations
+- Workflows and approvals
+- Marketplace listings
+- API keys and integrations
+- Usage and subscriptions
+- Audit events
+
+Do not build all future-phase database tables prematurely unless a genuine current dependency requires them.
+
+Use appropriate unique constraints and idempotent profile initialization.
+
+Do not reset or silently delete production data during startup.
+
+# 10. SECURITY AND RELIABILITY
+
+Implement the relevant Phase 1 protections:
+
+- Server-side authentication and authorization
+- Strict input validation
+- Environment-based secret management
+- Safe error messages
+- No sensitive secrets exposed to client bundles
+- Appropriate rate limiting for exposed authentication-adjacent endpoints where applicable
+- Secure session handling
+- Safe database queries
+- No unnecessary public user-data exposure
+- Correct error boundaries and fallback states
+
+Security should be built into the architecture, not left entirely for a later phase.
+
+# 11. PERFORMANCE AND ACCESSIBILITY
+
+Requirements:
+
+- Fast initial page rendering
+- Optimized images and fonts
+- Avoid heavy animations on lower-powered devices
+- Semantic HTML
+- Keyboard navigation
+- Accessible form labels
+- Appropriate contrast
+- Reduced-motion support
+- Clear focus indicators
+- No horizontal overflow on mobile
+- Graceful loading states
+
+The global network animation must not prevent the rest of the product from loading.
+
+# 12. REQUIRED TESTS
+
+Before declaring completion, run real checks.
+
+Verify:
+
+1. Application installs and starts successfully.
+2. TypeScript build succeeds.
+3. Production build succeeds.
+4. Database migrations work.
+5. Registration and login work with the configured provider.
+6. Logout works.
+7. Protected routes require authentication.
+8. New user profile initialization works.
+9. Repeated initialization does not create duplicates.
+10. Users without organizations can access the dashboard.
+11. Onboarding data persists.
+12. Profile edits persist.
+13. Theme preference persists.
+14. Dashboard widget preferences persist.
+15. Landing page navigation works.
+16. Responsive layouts render properly.
+17. No unhandled runtime errors occur in core tested flows.
+
+Use automated tests where feasible, and explicitly identify any steps that need manual verification.
+
+Never report tests as passing if they were not executed.
+
+# 13. COMPLETION REQUIREMENTS
+
+Before finishing, inspect the application yourself and fix all discovered Phase 1 defects.
+
+Provide a concise completion report containing:
+
+- Architecture and technology choices
+- Implemented features
+- Important file paths
+- Database migration status
+- Authentication configuration status
+- Tests executed and their actual results
+- Unresolved issues or required credentials
+- Future modules intentionally deferred
+- Exact steps to preview the application on Replit
+
+Do not begin Prompt 2.
+
+## FINAL ACCEPTANCE STANDARD
+
+Prompt 1 is only complete when:
+
+- The landing page is premium and responsive.
+- The global network visual works.
+- Real authentication is configured and tested, or a genuine external credential blocker is clearly identified.
+- The dashboard renders without fake data.
+- Onboarding and profile settings work against the database.
+- User data is correctly protected.
+- Navigation and theme controls work.
+- The project builds successfully.
+- The foundation is ready for Prompt 2 without needing an architectural rewrite.
+
+Build AGENTNEX as a serious long-term global SaaS product, not as a quick demo or static mockup.

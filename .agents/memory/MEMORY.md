@@ -1,0 +1,1 @@
+- [Workspace tooling](workspace-tooling.md) — Node test bundles must resolve workspace source and its transitive packages together.
