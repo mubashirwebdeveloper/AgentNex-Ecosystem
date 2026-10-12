@@ -1,0 +1,157 @@
+AGENTNEX — PROMPT 1 ADDITIONAL EXECUTION REQUIREMENTS
+These instructions supplement the previously provided AGENTNEX Prompt 1. They do not create a new development phase.
+Your objective is to deliver a genuinely functioning, production-oriented Phase 1 foundation with a premium interface matching the attached AGENTNEX visual concept.
+1. EXECUTION ORDER
+Work in the following order. Do not build everything simultaneously.
+Stage A — Architecture
+•	Inspect the new Replit workspace and available environment.
+•	Select one compatible full-stack architecture.
+•	Establish the frontend, backend, database, configuration, and testing structure.
+•	Confirm that the application starts successfully before moving forward.
+Stage B — Database and Authentication
+•	Connect a real PostgreSQL database.
+•	Create migrations and verified database models.
+•	Implement real authentication using a supported provider.
+•	Implement reliable authenticated user-profile initialization.
+•	Handle first-time and returning users correctly.
+•	Ensure repeated login and page refresh never produce duplicate account records.
+•	Protect authenticated routes and sensitive data.
+Stage C — Premium Landing Page
+•	Follow the attached AGENTNEX reference image.
+•	Implement the real responsive navigation.
+•	Build the hero section with the global connected-network visualization.
+•	Build all Phase 1 marketing sections specified in the original prompt.
+•	Implement working CTA navigation.
+•	Use professional animations and reusable components.
+•	Never fabricate users, companies, transactions, AI results, ratings, or platform statistics.
+Stage D — Application Dashboard
+•	Build the professional sidebar and dashboard layout.
+•	Display real authenticated user information.
+•	Implement onboarding and profile management.
+•	Create functional settings and theme controls.
+•	Implement persistently configurable dashboard widgets.
+•	Give future product modules clear, truthful roadmap screens.
+•	Ensure that a new user with no organizations or network records can load the dashboard without errors.
+Stage E — Integration
+•	Connect frontend forms to actual backend services.
+•	Connect backend services to the database.
+•	Validate requests and enforce permissions server-side.
+•	Handle loading, empty, validation-error, server-error, and success states.
+•	Ensure saved information remains correct after refresh and login.
+Stage F — Verification and Repair
+•	Run build, lint, type checks, database checks, and relevant automated tests.
+•	Exercise all core user journeys using available testing/browser tools.
+•	Fix actual defects before declaring success.
+•	Report any manual tests or externally blocked integrations accurately.
+2. VISUAL IMPLEMENTATION STANDARD
+The supplied reference image communicates the long-term AGENTNEX product direction.
+Maintain the following visual qualities:
+•	Modern enterprise-grade design.
+•	Dark navy backgrounds with electric blue, cyan, and limited orange highlights.
+•	High-quality typography.
+•	Sophisticated but controlled animations.
+•	Professional dashboards and interface components.
+•	Consistent icons, spacing, and interactions.
+•	Smooth desktop and mobile layouts.
+•	A prominent global network visualization.
+The resulting application should be visually impressive, but usability and correctness must remain the priorities.
+Do not put placeholder content, invented activity, or simulated real-time metrics into production dashboard widgets.
+3. REAL FUNCTIONALITY RULE
+Every implemented interactive control must have a meaningful outcome.
+Examples:
+•	Login must perform real authentication.
+•	Logout must terminate the session.
+•	Profile Save must persist validated data.
+•	Theme Toggle must actually change themes.
+•	Sidebar links must navigate correctly.
+•	Dashboard widget settings must persist.
+•	Onboarding must save actual user progress.
+•	Buttons for unimplemented functionality must not pretend to complete actions.
+A visually convincing screen is not sufficient evidence of a working feature.
+4. ERROR PREVENTION
+Pay special attention to avoiding these previously observed types of failures:
+•	"Organizations could not be loaded"
+•	"Your account could not be loaded"
+•	"This record already exists"
+•	Dashboard widgets unexpectedly disappearing
+•	Blank screens due to unauthenticated or missing data
+•	Broken navigation
+•	Incorrect database initialization
+•	Unhandled API failures
+•	Authentication redirect loops
+Use idempotent account initialization, appropriate database uniqueness constraints, safe authorization checks, stable query handling, and meaningful empty states.
+Do not merely suppress error messages. Fix their underlying causes.
+5. STRICT PHASE BOUNDARIES
+Prompt 1 must build the foundation, not simulate completion of future phases.
+Do not prematurely implement:
+•	Live autonomous AI agents
+•	Real agent-to-agent communication
+•	Supplier procurement transactions
+•	Paid marketplace installations
+•	Payment processing
+•	Enterprise workflow execution
+•	Public developer API monetization
+•	TrustScore calculations
+Those capabilities belong to later prompts.
+However, prepare clean architecture and navigation so that these modules can be integrated properly.
+6. ACCEPTANCE TEST SCENARIOS
+Verify these scenarios:
+1.	A new visitor can load the landing page.
+2.	The landing page works on mobile and desktop.
+3.	Navigation and CTA links behave correctly.
+4.	A new user can authenticate using the configured provider.
+5.	The user can complete onboarding.
+6.	The user can save and reload profile information.
+7.	A returning user can sign in again without creating duplicate records.
+8.	A new user without organizations can access the dashboard.
+9.	Dashboard widgets can be hidden and restored.
+10.	User preferences persist after page refresh.
+11.	Protected pages reject unauthorized access.
+12.	Theme switching works.
+13.	Invalid form inputs show proper validation.
+14.	Failed backend requests show meaningful error states.
+15.	The application builds and starts in the Replit environment.
+Where tests cannot be executed because of external credential or environment restrictions, clearly mark them as NOT VERIFIED.
+Do not mark unexecuted tests as passing.
+7. REQUIRED FINAL RESPONSE FORMAT
+At completion, provide:
+A. Implementation summary
+What was actually built.
+B. Application routes
+Which pages exist and what they do.
+C. Database status
+Models, migrations, and verified connectivity.
+D. Authentication status
+Provider, working user journey, and any outstanding configuration.
+E. Testing results
+A clear PASS / FAIL / NOT VERIFIED table, including actual checks executed.
+F. Issues and blockers
+Anything unfinished or requiring user action.
+G. Phase 2 readiness
+State whether the project is ready for Prompt 2, with supporting reasons.
+8. FINAL INSTRUCTION
+Never claim AGENTNEX is complete merely because a landing page and dashboard render.
+Prompt 1 is only complete when the implemented Phase 1 functions work reliably, the core tests have been executed, the interface is responsive, and any remaining limitations are clearly disclosed.
+If something is blocked, explain the blocker rather than fabricating a successful implementation.
+Do not start Prompt 2 until Prompt 1 is reviewed.
+IMPORTANT: AGENTNEX Master Prompt 1 has already been implemented in this Replit project.
+Do not restart development, rebuild the application, delete existing files, or reset the database.
+Treat the following additional requirements as a FINAL AUDIT, TESTING, BUG-FIXING, and QUALITY IMPROVEMENT checklist for the existing Prompt 1 implementation.
+First inspect what is already implemented. Preserve working functionality. Only implement missing requirements or fix verified problems.
+Run real tests, fix discovered errors, and provide an accurate PASS / FAIL / NOT VERIFIED report.
+Do not start Prompt 2. Do not make unnecessary changes that consume credits without improving the application.
+AGENTNEX — Premium UI/UX Correction & Real Functionality
+The current AGENTNEX implementation is good, but its visual design does not fully match my attached reference images.
+Carefully study ALL attached images and use them as the primary design reference for the entire application.
+•	Recreate the overall visual quality, layouts, colors, cards, navigation, dashboards, sections, animations, and page structures shown in the images.
+•	Do NOT repeat the same globe/network visualization everywhere. Use the globe mainly where appropriate, especially the landing-page hero and global network sections.
+•	Every page must have its own professional layout, matching its purpose and the reference images.
+•	Build a premium, modern, highly polished and responsive interface.
+•	Most importantly, all implemented features must actually work. Connect frontend actions to real backend logic, database records, authentication, and APIs where required.
+•	Do not create fake statistics, fake activity, fake AI agents, fake business listings, simulated transactions, nonfunctional buttons, or misleading success messages.
+•	Features planned for later phases must be clearly labeled as upcoming rather than pretending to work.
+•	Keep existing working functionality and architecture. Do not rebuild from scratch or delete existing data.
+•	Run real tests, fix errors, and verify all implemented interactions before completing.
+My goal is an AGENTNEX platform that looks like the supplied reference images AND works as real software—not just a beautiful demo.
+Do not start the next development phase. Improve and verify the current implementation first.
+

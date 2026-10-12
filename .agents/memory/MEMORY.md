@@ -1,1 +1,2 @@
 - [Workspace tooling](workspace-tooling.md) — Node test bundles must resolve workspace source and its transitive packages together.
+- [Visual scope](visual-scope.md) — Reference-led, page-specific layouts; reserve the globe mainly for landing and global network sections.

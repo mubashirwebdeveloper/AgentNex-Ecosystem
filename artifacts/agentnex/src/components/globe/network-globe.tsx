@@ -50,8 +50,8 @@ function isLand(lat: number, lon: number) {
 
 const DOTS: V3[] = (() => {
   const out: V3[] = [];
-  for (let lat = -70; lat <= 80; lat += 2.6) {
-    const step = 2.6 / Math.max(0.2, Math.cos(lat * DEG));
+  for (let lat = -70; lat <= 80; lat += 1.9) {
+    const step = 1.9 / Math.max(0.2, Math.cos(lat * DEG));
     for (let lon = -180; lon < 180; lon += step) if (isLand(lat, lon)) out.push(toXYZ(lat, lon));
   }
   return out;
@@ -147,6 +147,9 @@ export function NetworkGlobe({ selected, onSelect, className, showLabels = true 
       body.addColorStop(1, dark ? "rgba(6,12,32,0.98)" : "rgba(196,214,244,1)");
       ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.fillStyle = body; ctx.fill();
       ctx.strokeStyle = `rgba(${cyan},${dark ? 0.45 : 0.5})`; ctx.lineWidth = 1; ctx.stroke();
+      const rim = ctx.createRadialGradient(cx, cy, R * 0.82, cx, cy, R * 1.06);
+      rim.addColorStop(0, `rgba(${cyan},0)`); rim.addColorStop(0.75, `rgba(${cyan},${dark ? 0.22 : 0.14})`); rim.addColorStop(1, `rgba(${cyan},0)`);
+      ctx.beginPath(); ctx.arc(cx, cy, R * 1.06, 0, Math.PI * 2); ctx.fillStyle = rim; ctx.fill();
 
       // graticule
       ctx.strokeStyle = `rgba(${blue},${dark ? 0.12 : 0.14})`;
@@ -162,9 +165,9 @@ export function NetworkGlobe({ selected, onSelect, className, showLabels = true 
       for (const d of DOTS) {
         const p = project(d, R, cx, cy);
         if (p.z <= 0) continue;
-        ctx.fillStyle = `rgba(${cyan},${0.18 + p.z * (dark ? 0.6 : 0.55)})`;
-        const s = 0.6 + p.z * 1.1;
-        ctx.fillRect(p.x - s / 2, p.y - s / 2, s, s);
+        ctx.fillStyle = `rgba(${cyan},${0.2 + p.z * (dark ? 0.7 : 0.6)})`;
+        const s = 0.5 + p.z * 1.0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, s * 0.6, 0, Math.PI * 2); ctx.fill();
       }
 
       const nodes = CATEGORIES.map((c) => toXYZ(c.lat, c.lon));

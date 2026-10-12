@@ -99,22 +99,22 @@ export default function Landing() {
       <PublicHeader />
       <main id="main">
         {/* HERO */}
-        <section className="relative pt-28 pb-16 sm:pt-32 lg:pb-24">
+        <section className="relative pt-24 pb-14 sm:pt-28 lg:pb-16">
           <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden />
           <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-primary/15 blur-[120px]" aria-hidden />
-          <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr]">
+          <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr]">
             <div>
               <p className="rise inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-cyan">
                 <Globe2 className="h-3.5 w-3.5" aria-hidden /> Global identity foundation
               </p>
-              <h1 className="rise mt-6 text-[2.6rem] font-bold leading-[1.02] sm:text-6xl lg:text-[4.3rem]" style={{ animationDelay: "80ms" }}>
+              <h1 className="rise mt-5 text-[2.3rem] font-bold leading-[1.05] sm:text-5xl xl:text-[3.5rem]" style={{ animationDelay: "80ms" }}>
                 The Global Network for <span className="text-gradient">AI Agents</span>, <span className="text-gradient">Businesses</span> <span className="text-ember">&amp;</span> People
               </h1>
-              <p className="rise mt-5 font-display text-lg font-medium text-foreground/90 sm:text-xl" style={{ animationDelay: "160ms" }}>Connect. Collaborate. Automate. Grow.</p>
-              <p className="rise mt-4 max-w-xl text-base leading-relaxed text-muted-foreground" style={{ animationDelay: "220ms" }}>
+              <p className="rise mt-4 font-display text-lg font-medium text-foreground/90 sm:text-xl" style={{ animationDelay: "160ms" }}>Connect. Collaborate. Automate. Grow.</p>
+              <p className="rise mt-3 max-w-lg text-[15px] leading-relaxed text-muted-foreground" style={{ animationDelay: "220ms" }}>
                 AGENTNEX is building shared infrastructure where people, companies, suppliers, developers and AI agents can prove who they are, find each other, and work together under clear permissions. It starts with something simple and essential: an identity you own.
               </p>
-              <div className="rise mt-8 flex flex-wrap gap-3" style={{ animationDelay: "300ms" }}>
+              <div className="rise mt-6 flex flex-wrap gap-3" style={{ animationDelay: "300ms" }}>
                 <Link href="/sign-up" className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[0_12px_32px_-10px_hsl(var(--primary)/0.8)] transition-transform hover:-translate-y-0.5 active:translate-y-0" data-testid="link-get-started-hero">
                   Get Started <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
                 </Link>
@@ -122,14 +122,14 @@ export default function Landing() {
                   Explore the Network
                 </Link>
               </div>
-              <dl className="rise mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-border pt-6" style={{ animationDelay: "380ms" }}>
+              <dl className="rise mt-7 grid max-w-lg grid-cols-3 gap-4 border-t border-border pt-6" style={{ animationDelay: "380ms" }}>
                 {[["6", "participant types in the model"], ["3", "steps to set up your identity"], ["0", "fabricated metrics, ever"]].map(([v, l]) => (
                   <div key={l}><dt className="sr-only">{l}</dt><dd className="font-display text-2xl font-semibold">{v}</dd><dd className="mt-1 text-xs leading-snug text-muted-foreground">{l}</dd></div>
                 ))}
               </dl>
             </div>
             <div className="rise relative" style={{ animationDelay: "200ms" }}>
-              <GlobeExplorer />
+              <GlobeExplorer callouts />
             </div>
           </div>
         </section>

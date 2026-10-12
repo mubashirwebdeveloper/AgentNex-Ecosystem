@@ -69,8 +69,8 @@ function buildAppearance(mode: "dark" | "light") {
       borderRadius: "0.75rem",
     },
     elements: {
-      rootBox: "w-full flex justify-center",
-      cardBox: { background: c.bg, border: `1px solid ${c.border}`, borderRadius: "1.25rem", width: "440px", maxWidth: "100%", overflow: "hidden", boxShadow: d ? "0 30px 60px -30px rgba(47,123,255,0.45)" : "0 30px 60px -30px rgba(21,101,230,0.25)" },
+      rootBox: { width: "100%", maxWidth: "440px", minWidth: 0, display: "flex", justifyContent: "center" },
+      cardBox: { background: c.bg, border: `1px solid ${c.border}`, borderRadius: "1.25rem", width: "100%", maxWidth: "440px", minWidth: 0, overflow: "hidden", boxShadow: d ? "0 30px 60px -30px rgba(47,123,255,0.45)" : "0 30px 60px -30px rgba(21,101,230,0.25)" },
       card: "!shadow-none !border-0 !bg-transparent !rounded-none",
       footer: "!shadow-none !border-0 !bg-transparent !rounded-none",
       headerTitle: { color: c.fg, fontFamily: "Sora, Manrope, sans-serif", fontWeight: 600, letterSpacing: "-0.02em" },

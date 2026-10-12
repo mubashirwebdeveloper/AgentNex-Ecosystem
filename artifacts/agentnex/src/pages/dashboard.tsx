@@ -8,7 +8,7 @@ import {
 import type { Widgets } from "@workspace/api-client-react";
 import { PageHeader } from "@/components/app/page-header";
 import { ErrorState, EmptyState } from "@/components/app/states";
-import { GlobeExplorer } from "@/components/globe/globe-explorer";
+import { CATEGORIES } from "@/components/globe/network-globe";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Switch } from "@/components/ui/switch";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 const WIDGETS: { key: keyof Widgets; label: string; desc: string; icon: typeof UserRound }[] = [
   { key: "account", label: "Account", desc: "Your saved profile details", icon: UserRound },
   { key: "checklist", label: "Getting started", desc: "Setup checklist and progress", icon: ListChecks },
-  { key: "network", label: "Network concept", desc: "Interactive ecosystem globe", icon: Globe2 },
+  { key: "network", label: "Network concept", desc: "Roadmap of ecosystem participants", icon: Globe2 },
 ];
 
 function Ring({ value }: { value: number }) {
@@ -96,6 +96,7 @@ export default function Dashboard() {
   const visibleCount = Object.values(widgets).filter(Boolean).length;
 
   const toggleWidget = (key: keyof Widgets, value: boolean) => {
+    if (save.isPending) return;
     const nextW: Widgets = { ...widgets, [key]: value };
     setPending(nextW);
     save.mutate(
@@ -130,7 +131,7 @@ export default function Dashboard() {
                     <label key={w.key} className="flex cursor-pointer items-center gap-3">
                       <w.icon className="h-4 w-4 text-muted-foreground" aria-hidden />
                       <span className="flex-1"><span className="block text-sm font-medium">{w.label}</span><span className="block text-xs text-muted-foreground">{w.desc}</span></span>
-                      <Switch checked={widgets[w.key]} onCheckedChange={(v) => toggleWidget(w.key, v)} data-testid={`switch-widget-${w.key}`} aria-label={`Show ${w.label} widget`} />
+                      <Switch checked={widgets[w.key]} disabled={save.isPending} onCheckedChange={(v) => toggleWidget(w.key, v)} data-testid={`switch-widget-${w.key}`} aria-label={`Show ${w.label} widget`} />
                     </label>
                   ))}
                 </div>
@@ -197,8 +198,18 @@ export default function Dashboard() {
           )}
 
           {widgets.network && (
-            <Card title="Global network concept" icon={Globe2} className={cn(widgets.checklist && widgets.account ? "lg:col-span-1" : "lg:col-span-2", "lg:row-span-2")}>
-              <GlobeExplorer compact />
+            <Card title="Ecosystem roadmap" icon={Globe2} className={cn(widgets.checklist && widgets.account ? "lg:col-span-1" : "lg:col-span-2", "lg:row-span-2")}>
+              <p className="text-xs text-muted-foreground">Participant types planned for AGENTNEX. Your personal identity is the live layer today.</p>
+              <ul className="mt-4 space-y-1.5">
+                {CATEGORIES.map((c) => (
+                  <li key={c.id} className="flex items-center gap-3 rounded-lg border border-border/70 bg-background/40 px-3 py-2">
+                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-primary/12 text-cyan"><c.icon className="h-3.5 w-3.5" aria-hidden /></span>
+                    <span className="flex-1 text-sm">{c.label}</span>
+                    <span className={cn("font-mono text-[9px] uppercase tracking-widest", c.id === "humans" ? "text-cyan" : "text-ember")}>{c.id === "humans" ? "Live" : "Planned"}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/network" className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline" data-testid="link-dashboard-network">Open network concept <ArrowRight className="h-3.5 w-3.5" aria-hidden /></Link>
             </Card>
           )}
 
