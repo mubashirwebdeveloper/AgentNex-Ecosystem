@@ -105,7 +105,8 @@ export function NetworkGlobe({ selected, onSelect, className, showLabels = true 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let w = 0, h = 0, dpr = 1, raf = 0, visible = true, last = performance.now(), t0 = last;
+    let w = 0, h = 0, dpr = 1, raf = 0, visible = true, last = performance.now();
+    const t0 = last;
     const nodeScreen: { x: number; y: number; z: number }[] = [];
 
     const resize = () => {

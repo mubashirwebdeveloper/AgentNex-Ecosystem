@@ -127,9 +127,9 @@ export default function Onboarding() {
   const completedSteps = me.data?.onboardingCompleted ? 3 : me.data?.onboardingStep ?? 0;
 
   return (
-    <div className="noise relative min-h-[100dvh] bg-background">
+    <div className="noise relative min-h-[100dvh] overflow-x-clip bg-background">
       <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden />
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[800px] -translate-x-1/2 rounded-full bg-primary/15 blur-[120px]" aria-hidden />
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[800px] max-w-full -translate-x-1/2 rounded-full bg-primary/15 blur-[120px]" aria-hidden />
       <header className="relative mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
         <Link href="/dashboard" aria-label="Go to dashboard"><Logo /></Link>
         <div className="flex items-center gap-2">

@@ -1,0 +1,32 @@
+AGENTNEX — PROMPT 1 FINAL ACCEPTANCE VERIFICATION
+The main implementation of Prompt 1 is complete. Do NOT rebuild, redesign, reset the database, or start Prompt 2.
+Your task is to close the remaining Phase 1 verification gaps with minimal changes and minimal unnecessary credit usage.
+1.	Complete the returning-user browser login, dashboard and session persistence tests.
+2.	Verify the full authenticated mobile journey: sign-in, onboarding, dashboard, profile and settings.
+3.	Test actual backend failure handling and ensure meaningful error messages appear without exposing sensitive information.
+4.	Add a compatible lint configuration and run lint checks.
+5.	Fix any genuine failures identified during these tests.
+6.	Verify that the mobile sign-in clipping fix remains correct.
+7.	Preserve all existing working functionality and data.
+8.	Remove the generated development audit account only if its exact identity is confirmed and deletion is safe.
+9.	Report any Clerk provider UI, Google consent, email verification or account recovery scenarios that cannot be verified without external interaction. Do not claim unexecuted checks passed.
+10.	Re-run the production build and relevant automated tests after fixes.
+At completion, provide an accurate PASS / FAIL / NOT VERIFIED table and confirm whether Prompt 1 meets its acceptance criteria.
+Update docs/phase1-audit.md with the final results.
+Do not start Prompt 2, add new features, or perform unrelated redesigns.
+AGENTNEX — Complete UI/UX Reference Implementation
+Carefully analyze ALL attached AGENTNEX reference images.
+I want the entire AGENTNEX platform to follow these images as closely as possible, including the landing page, dashboard, global network, AI agents, business network, marketplace, workflows, procurement, developer platform, billing, and settings.
+Requirements:
+1.	Match the reference images' premium layouts, colors, typography, cards, navigation, spacing, visual hierarchy, and animations.
+2.	Give every page a unique, professional design appropriate to its purpose. Do not repeat the globe everywhere.
+3.	Make every currently implemented feature genuinely functional using real authentication, backend services, database operations, and APIs as needed.
+4.	STRICTLY NO FAKE DATA OR FAKE FUNCTIONALITY: No fabricated users, agents, businesses, earnings, transactions, statistics, reviews, or simulated success messages.
+5.	Show honest empty states when real data is unavailable.
+6.	Future-phase features must display beautifully designed, clearly labeled previews or roadmap pages—not pretend to be functional.
+7.	Preserve existing code, data, working functionality, and architecture. Do not rebuild from scratch.
+8.	Ensure full desktop/mobile responsiveness, smooth performance, accessibility, and consistent dark/light themes.
+9.	Test all changes and fix errors before completion.
+Important: The images define the final visual direction, but do not prematurely implement the functionality of future development phases.
+Make AGENTNEX visually match the attached references while keeping every live feature authentic, secure, and reliable. Do not start Prompt 2 yet.
+

@@ -1,10 +1,11 @@
-import express, { type Express, type ErrorRequestHandler } from "express";
+import express, { type Express } from "express";
 import { clerkMiddleware } from "@clerk/express";
 import { publishableKeyFromHost } from "@clerk/shared/keys";
 import { CLERK_PROXY_PATH, clerkProxyMiddleware, getClerkProxyHost } from "./middlewares/clerkProxyMiddleware";
 import pinoHttp from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
+import { errorHandler } from "./lib/error-handler";
 
 const app: Express = express();
 
@@ -49,11 +50,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api", router);
-const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
-  const status = error?.status === 400 ? 400 : error?.status === 413 ? 413 : 500;
-  req.log.error({ status }, "Request failed");
-  res.status(status).json({ error: status === 500 ? "Something went wrong. Please try again." : "Invalid request body." });
-};
 app.use(errorHandler);
 
 export default app;
