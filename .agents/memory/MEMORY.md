@@ -1,2 +1,4 @@
 - [Workspace tooling](workspace-tooling.md) — Node test bundles must resolve workspace source and its transitive packages together.
 - [Visual scope](visual-scope.md) — Reference-led, page-specific layouts; reserve the globe mainly for landing and global network sections.
+- [Organization boundaries](organization-boundaries.md) — Database memberships are authoritative; context is not permission, ownership transfers atomically, and deletion retains history.
+- [Test cleanup](test-fixture-cleanup.md) — Finish browser activity and remove synthetic identities before final profile cleanup, or requests can recreate fixtures.

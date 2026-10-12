@@ -14,6 +14,8 @@ import { Switch } from "@/components/ui/switch";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMe, useDashboardData, useSavePreferences, errorMessage } from "@/hooks/use-account";
 import { useToast } from "@/hooks/use-toast";
+import { useWorkspace } from "@/hooks/use-organizations";
+import { OrgMark, RoleBadge } from "@/components/org/org-ui";
 import { ACCOUNT_TYPES, LANGUAGES } from "@/lib/nav";
 import { usePageMeta } from "@/lib/meta";
 import { cn } from "@/lib/utils";
@@ -113,7 +115,7 @@ export default function Dashboard() {
       <PageHeader
         crumbs={[{ label: "Overview" }]}
         title={<>{greeting()}, <span className="text-gradient">{name}</span></>}
-        description={`Member since ${new Date(p.createdAt).toLocaleDateString(undefined, { month: "long", year: "numeric" })}. This is your personal workspace; no organization is needed.`}
+        description={`Member since ${new Date(p.createdAt).toLocaleDateString(undefined, { month: "long", year: "numeric" })}. Your personal profile and preferences are available in every workspace.`}
         actions={
           <>
             <Popover>
@@ -235,6 +237,8 @@ export default function Dashboard() {
         </div>
       )}
 
+      <WorkspaceCard />
+
       <section className="mt-5 grid gap-5 md:grid-cols-2">
         <div className="surface rounded-2xl">
           <EmptyState icon={<Inbox className="h-5 w-5" aria-hidden />} title="No activity yet">Connections, agents and workflow activity will appear here once those modules launch. Nothing is simulated.</EmptyState>
@@ -244,7 +248,7 @@ export default function Dashboard() {
           <ul className="mt-4 space-y-3">
             {[
               { href: p.onboardingCompleted ? "/profile" : "/onboarding", icon: Compass, t: p.onboardingCompleted ? "Add a professional description" : "Complete onboarding", d: "A complete profile carries into every future module." },
-              { href: "/organizations", icon: Building2, t: "Preview Organizations", d: "See what arrives in Phase 2: teams and roles." },
+              { href: "/organizations", icon: Building2, t: "Organizations", d: "Create a team, invite members and manage roles." },
               { href: "/agents", icon: Bot, t: "Learn about AI Agents", d: "How Agent Passports will work." },
             ].map((x) => (
               <li key={x.t}>
@@ -259,5 +263,40 @@ export default function Dashboard() {
         </div>
       </section>
     </div>
+  );
+}
+
+function WorkspaceCard() {
+  const ws = useWorkspace();
+  if (ws.isLoading) return <Skeleton className="mt-5 h-28 rounded-2xl" />;
+  if (ws.isError || !ws.data) {
+    return <div className="mt-5"><ErrorState title="Workspace context did not load" onRetry={() => ws.refetch()} /></div>;
+  }
+  const { organizations, selectedOrganizationId } = ws.data;
+  const current = organizations.find((o) => o.id === selectedOrganizationId);
+  return (
+    <section className="surface mt-5 rounded-2xl p-5 sm:p-6" data-testid="card-workspace">
+      <div className="mb-4 flex items-center gap-2">
+        <Building2 className="h-4 w-4 text-cyan" aria-hidden />
+        <h2 className="text-sm font-semibold">Organizations</h2>
+        <span className="ml-2 text-xs text-muted-foreground" data-testid="text-workspace-context">Context: {current ? current.name : "Personal"}</span>
+        <Link href={organizations.length ? "/organizations" : "/organizations/new"} className="ml-auto text-xs font-semibold text-primary hover:underline" data-testid="link-dashboard-orgs">{organizations.length ? "View all" : "Create one"}</Link>
+      </div>
+      {organizations.length === 0 ? (
+        <p className="text-sm text-muted-foreground">You are working in your personal context. Create an organization when you need a team with roles.</p>
+      ) : (
+        <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {organizations.slice(0, 6).map((o) => (
+            <li key={o.id}>
+              <Link href={`/organizations/${o.id}`} className={cn("flex items-center gap-3 rounded-xl border p-3 transition-colors hover:border-primary/50", o.id === selectedOrganizationId ? "border-cyan/50 bg-cyan/5" : "border-border bg-background/40")} data-testid={`link-dashboard-org-${o.id}`}>
+                <OrgMark name={o.name} className="h-9 w-9 text-xs" />
+                <span className="min-w-0 flex-1"><span className="block truncate text-sm font-medium">{o.name}</span><span className="block text-xs text-muted-foreground">{o.memberCount} {o.memberCount === 1 ? "member" : "members"}</span></span>
+                <RoleBadge role={o.role} />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }

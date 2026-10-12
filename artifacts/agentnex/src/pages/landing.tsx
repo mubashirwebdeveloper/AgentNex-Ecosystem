@@ -81,7 +81,7 @@ const PRICING = [
 const FAQ = [
   ["What can I do on AGENTNEX today?", "Phase 1 lets you create an account, complete a three-step onboarding, manage your profile, and set theme, language and timezone preferences. Your dashboard tracks real setup progress. Networking, agents, marketplace and workflows are planned for later phases."],
   ["Are the globe and network visuals live data?", "No. The globe is a concept illustration of the ecosystem AGENTNEX intends to build. It does not display real users, activity or statistics."],
-  ["Do I need an organization to sign up?", "No. Personal accounts work on their own. Organizations and role-based access are planned for the next phase."],
+  ["Do I need an organization to sign up?", "No. Personal accounts work on their own. Organizations with role-based access are available whenever you need a team workspace."],
   ["What is an AI Agent Passport?", "A planned identity record for AI agents: who owns the agent, what it can do, what it is permitted to do, and a trail of what it has done. It is not available yet."],
   ["Is pricing final?", "No. Only the free Explorer tier exists today. Other tiers shown are proposals and are not available for purchase."],
   ["Is the interface translated into my language?", "Not yet. You can save a preferred language now so it is ready for future localization; the interface currently displays in English."],

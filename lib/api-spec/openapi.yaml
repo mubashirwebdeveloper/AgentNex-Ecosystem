@@ -11,6 +11,226 @@ tags:
   - name: health
     description: Health operations
 paths:
+  /organizations:
+    get:
+      operationId: listOrganizations
+      responses:
+        "200":
+          description: Current user's active organizations
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Organization" }
+    post:
+      operationId: createOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OrganizationInput" }
+      responses:
+        "201":
+          description: Created with owner membership
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Organization" }
+  /organizations/{organizationId}:
+    parameters:
+      - &organizationId
+        name: organizationId
+        in: path
+        required: true
+        schema: { type: string }
+    get:
+      operationId: getOrganization
+      responses:
+        "200":
+          description: Authorized organization details
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Organization" }
+    patch:
+      operationId: updateOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OrganizationInput" }
+      responses:
+        "200":
+          description: Saved organization
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Organization" }
+  /organizations/{organizationId}/members:
+    parameters: [*organizationId]
+    get:
+      operationId: listOrganizationMembers
+      responses:
+        "200":
+          description: Real current memberships
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/OrganizationMember" }
+  /organizations/{organizationId}/members/{userId}:
+    parameters:
+      - *organizationId
+      - name: userId
+        in: path
+        required: true
+        schema: { type: string }
+    patch:
+      operationId: changeOrganizationRole
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MembershipRoleInput" }
+      responses:
+        "200":
+          description: Role updated
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OrganizationAction" }
+    delete:
+      operationId: removeOrganizationMember
+      responses:
+        "200":
+          description: Membership removed
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OrganizationAction" }
+  /organizations/{organizationId}/invitations:
+    parameters: [*organizationId]
+    get:
+      operationId: listOrganizationInvitations
+      responses:
+        "200":
+          description: Invitations visible to authorized managers
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/OrganizationInvitation" }
+    post:
+      operationId: inviteOrganizationMember
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/InvitationInput" }
+      responses:
+        "201":
+          description: Secure token returned once for manual sharing; no email sent
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/InvitationCreated" }
+  /organizations/{organizationId}/invitations/{invitationId}:
+    parameters:
+      - *organizationId
+      - name: invitationId
+        in: path
+        required: true
+        schema: { type: string }
+    delete:
+      operationId: revokeOrganizationInvitation
+      responses:
+        "200":
+          description: Invitation revoked
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OrganizationAction" }
+  /organizations/{organizationId}/leave:
+    parameters: [*organizationId]
+    post:
+      operationId: leaveOrganization
+      responses:
+        "200":
+          description: Membership ended
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OrganizationAction" }
+  /organizations/{organizationId}/transfer:
+    parameters: [*organizationId]
+    post:
+      operationId: transferOrganizationOwnership
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OwnershipTransferInput" }
+      responses:
+        "200":
+          description: Ownership transferred atomically
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OrganizationAction" }
+  /organizations/{organizationId}/archive:
+    parameters: [*organizationId]
+    post:
+      operationId: archiveOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OrganizationArchiveInput" }
+      responses:
+        "200":
+          description: Soft-deleted; audit retained
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OrganizationAction" }
+  /organizations/{organizationId}/audit:
+    parameters: [*organizationId]
+    get:
+      operationId: listOrganizationAudit
+      responses:
+        "200":
+          description: Latest 100 real administrative actions, owner/admin only
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/OrganizationAudit" }
+  /invitations/accept:
+    post:
+      operationId: acceptOrganizationInvitation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/InvitationAcceptanceInput" }
+      responses:
+        "200":
+          description: Membership created after verified recipient check
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OrganizationAction" }
+  /workspace:
+    get:
+      operationId: getWorkspace
+      responses:
+        "200":
+          description: Validated personal or organization context
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Workspace" }
+    patch:
+      operationId: selectWorkspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/WorkspaceInput" }
+      responses:
+        "200":
+          description: Persisted validated context
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Workspace" }
   /me:
     get:
       operationId: getMe
@@ -72,6 +292,118 @@ paths:
                 $ref: "#/components/schemas/HealthStatus"
 components:
   schemas:
+    OrganizationRole:
+      type: string
+      enum: [owner, admin, member, viewer]
+    OrganizationInput:
+      type: object
+      required: [name, type, country]
+      properties:
+        name: { type: string, minLength: 2, maxLength: 100 }
+        description: { type: string, maxLength: 2000 }
+        type: { type: string, enum: [business, agency, startup, enterprise, other] }
+        country: { type: string, minLength: 2, maxLength: 80 }
+        website: { type: string, maxLength: 300 }
+    Organization:
+      allOf:
+        - { $ref: "#/components/schemas/OrganizationInput" }
+        - type: object
+          required: [id, slug, description, website, ownerUserId, role, createdAt, updatedAt, memberCount, pendingInvitationCount]
+          properties:
+            id: { type: string }
+            slug: { type: string }
+            description: { type: string }
+            website: { type: string }
+            ownerUserId: { type: string }
+            role: { $ref: "#/components/schemas/OrganizationRole" }
+            createdAt: { type: string }
+            updatedAt: { type: string }
+            memberCount: { type: integer }
+            pendingInvitationCount: { type: integer }
+    OrganizationMember:
+      type: object
+      required: [id, userId, displayName, role, status, joinedAt]
+      properties:
+        id: { type: string }
+        userId: { type: string }
+        displayName: { type: string }
+        role: { $ref: "#/components/schemas/OrganizationRole" }
+        status: { type: string, enum: [active] }
+        joinedAt: { type: string }
+    MembershipRoleInput:
+      type: object
+      required: [role]
+      properties:
+        role: { type: string, enum: [admin, member, viewer] }
+    InvitationInput:
+      type: object
+      required: [email, role]
+      properties:
+        email: { type: string, format: email, maxLength: 254 }
+        role: { type: string, enum: [admin, member, viewer] }
+    OrganizationInvitation:
+      type: object
+      required: [id, email, role, status, createdAt, expiresAt]
+      properties:
+        id: { type: string }
+        email: { type: string }
+        role: { type: string, enum: [admin, member, viewer] }
+        status: { type: string, enum: [pending, accepted, revoked, expired] }
+        createdAt: { type: string }
+        expiresAt: { type: string }
+    InvitationCreated:
+      type: object
+      required: [invitation, token, delivery]
+      properties:
+        invitation: { $ref: "#/components/schemas/OrganizationInvitation" }
+        token: { type: string }
+        delivery: { type: string, enum: [manual] }
+    InvitationAcceptanceInput:
+      type: object
+      required: [token]
+      properties:
+        token: { type: string, minLength: 43, maxLength: 43, pattern: "^[A-Za-z0-9_-]+$" }
+    OwnershipTransferInput:
+      type: object
+      required: [userId, confirmation]
+      properties:
+        userId: { type: string, maxLength: 100 }
+        confirmation: { type: string, maxLength: 100 }
+    OrganizationArchiveInput:
+      type: object
+      required: [confirmation]
+      properties:
+        confirmation: { type: string, maxLength: 100 }
+    OrganizationAction:
+      type: object
+      required: [ok, organizationId]
+      properties:
+        ok: { type: boolean }
+        organizationId: { type: string }
+    WorkspaceInput:
+      type: object
+      required: [organizationId]
+      properties:
+        organizationId: { type: [string, "null"] }
+    Workspace:
+      type: object
+      required: [organizations, selectedOrganizationId]
+      properties:
+        organizations:
+          type: array
+          items: { $ref: "#/components/schemas/Organization" }
+        selectedOrganizationId: { type: [string, "null"] }
+    OrganizationAudit:
+      type: object
+      required: [id, action, actorName, createdAt, metadata]
+      properties:
+        id: { type: string }
+        action: { type: string }
+        actorName: { type: string }
+        createdAt: { type: string }
+        metadata:
+          type: object
+          additionalProperties: { type: string }
     ProfileInput:
       type: object
       additionalProperties: false

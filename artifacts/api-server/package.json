@@ -8,7 +8,7 @@
     "build": "node ./build.mjs",
     "start": "node --enable-source-maps ./dist/index.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "esbuild src/profile.test.ts src/error-handler.test.ts --bundle --platform=node --format=cjs --external:pg-native --outdir=dist/tests --out-extension:.js=.cjs && node --test dist/tests/*.test.cjs"
+    "test": "esbuild src/profile.test.ts src/error-handler.test.ts src/organizations.test.ts --bundle --platform=node --format=cjs --external:pg-native --outdir=dist/tests --out-extension:.js=.cjs && node --test dist/tests/*.test.cjs"
   },
   "dependencies": {
     "@clerk/express": "^2.1.78",

@@ -8,6 +8,431 @@
 import * as zod from 'zod';
 
 
+export const listOrganizationsResponseOneNameMin = 2;
+export const listOrganizationsResponseOneNameMax = 100;
+
+export const listOrganizationsResponseOneDescriptionMax = 2000;
+
+export const listOrganizationsResponseOneCountryMin = 2;
+export const listOrganizationsResponseOneCountryMax = 80;
+
+export const listOrganizationsResponseOneWebsiteMax = 300;
+
+
+
+export const ListOrganizationsResponseItem = zod.object({
+  "name": zod.string().min(listOrganizationsResponseOneNameMin).max(listOrganizationsResponseOneNameMax),
+  "description": zod.string().max(listOrganizationsResponseOneDescriptionMax),
+  "type": zod.enum(['business', 'agency', 'startup', 'enterprise', 'other']),
+  "country": zod.string().min(listOrganizationsResponseOneCountryMin).max(listOrganizationsResponseOneCountryMax),
+  "website": zod.string().max(listOrganizationsResponseOneWebsiteMax)
+}).and(zod.object({
+  "id": zod.string(),
+  "slug": zod.string(),
+  "description": zod.string(),
+  "website": zod.string(),
+  "ownerUserId": zod.string(),
+  "role": zod.enum(['owner', 'admin', 'member', 'viewer']),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string(),
+  "memberCount": zod.number().int(),
+  "pendingInvitationCount": zod.number().int()
+}))
+export const ListOrganizationsResponse = zod.array(ListOrganizationsResponseItem)
+
+
+export const createOrganizationBodyNameMin = 2;
+export const createOrganizationBodyNameMax = 100;
+
+export const createOrganizationBodyDescriptionMax = 2000;
+
+export const createOrganizationBodyCountryMin = 2;
+export const createOrganizationBodyCountryMax = 80;
+
+export const createOrganizationBodyWebsiteMax = 300;
+
+
+
+export const CreateOrganizationBody = zod.object({
+  "name": zod.string().min(createOrganizationBodyNameMin).max(createOrganizationBodyNameMax),
+  "description": zod.string().max(createOrganizationBodyDescriptionMax).optional(),
+  "type": zod.enum(['business', 'agency', 'startup', 'enterprise', 'other']),
+  "country": zod.string().min(createOrganizationBodyCountryMin).max(createOrganizationBodyCountryMax),
+  "website": zod.string().max(createOrganizationBodyWebsiteMax).optional()
+})
+
+export const createOrganizationResponseOneNameMin = 2;
+export const createOrganizationResponseOneNameMax = 100;
+
+export const createOrganizationResponseOneDescriptionMax = 2000;
+
+export const createOrganizationResponseOneCountryMin = 2;
+export const createOrganizationResponseOneCountryMax = 80;
+
+export const createOrganizationResponseOneWebsiteMax = 300;
+
+
+
+export const CreateOrganizationResponse = zod.object({
+  "name": zod.string().min(createOrganizationResponseOneNameMin).max(createOrganizationResponseOneNameMax),
+  "description": zod.string().max(createOrganizationResponseOneDescriptionMax),
+  "type": zod.enum(['business', 'agency', 'startup', 'enterprise', 'other']),
+  "country": zod.string().min(createOrganizationResponseOneCountryMin).max(createOrganizationResponseOneCountryMax),
+  "website": zod.string().max(createOrganizationResponseOneWebsiteMax)
+}).and(zod.object({
+  "id": zod.string(),
+  "slug": zod.string(),
+  "description": zod.string(),
+  "website": zod.string(),
+  "ownerUserId": zod.string(),
+  "role": zod.enum(['owner', 'admin', 'member', 'viewer']),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string(),
+  "memberCount": zod.number().int(),
+  "pendingInvitationCount": zod.number().int()
+}))
+
+
+export const GetOrganizationParams = zod.object({
+  "organizationId": zod.coerce.string()
+})
+
+export const getOrganizationResponseOneNameMin = 2;
+export const getOrganizationResponseOneNameMax = 100;
+
+export const getOrganizationResponseOneDescriptionMax = 2000;
+
+export const getOrganizationResponseOneCountryMin = 2;
+export const getOrganizationResponseOneCountryMax = 80;
+
+export const getOrganizationResponseOneWebsiteMax = 300;
+
+
+
+export const GetOrganizationResponse = zod.object({
+  "name": zod.string().min(getOrganizationResponseOneNameMin).max(getOrganizationResponseOneNameMax),
+  "description": zod.string().max(getOrganizationResponseOneDescriptionMax),
+  "type": zod.enum(['business', 'agency', 'startup', 'enterprise', 'other']),
+  "country": zod.string().min(getOrganizationResponseOneCountryMin).max(getOrganizationResponseOneCountryMax),
+  "website": zod.string().max(getOrganizationResponseOneWebsiteMax)
+}).and(zod.object({
+  "id": zod.string(),
+  "slug": zod.string(),
+  "description": zod.string(),
+  "website": zod.string(),
+  "ownerUserId": zod.string(),
+  "role": zod.enum(['owner', 'admin', 'member', 'viewer']),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string(),
+  "memberCount": zod.number().int(),
+  "pendingInvitationCount": zod.number().int()
+}))
+
+
+export const UpdateOrganizationParams = zod.object({
+  "organizationId": zod.coerce.string()
+})
+
+export const updateOrganizationBodyNameMin = 2;
+export const updateOrganizationBodyNameMax = 100;
+
+export const updateOrganizationBodyDescriptionMax = 2000;
+
+export const updateOrganizationBodyCountryMin = 2;
+export const updateOrganizationBodyCountryMax = 80;
+
+export const updateOrganizationBodyWebsiteMax = 300;
+
+
+
+export const UpdateOrganizationBody = zod.object({
+  "name": zod.string().min(updateOrganizationBodyNameMin).max(updateOrganizationBodyNameMax),
+  "description": zod.string().max(updateOrganizationBodyDescriptionMax).optional(),
+  "type": zod.enum(['business', 'agency', 'startup', 'enterprise', 'other']),
+  "country": zod.string().min(updateOrganizationBodyCountryMin).max(updateOrganizationBodyCountryMax),
+  "website": zod.string().max(updateOrganizationBodyWebsiteMax).optional()
+})
+
+export const updateOrganizationResponseOneNameMin = 2;
+export const updateOrganizationResponseOneNameMax = 100;
+
+export const updateOrganizationResponseOneDescriptionMax = 2000;
+
+export const updateOrganizationResponseOneCountryMin = 2;
+export const updateOrganizationResponseOneCountryMax = 80;
+
+export const updateOrganizationResponseOneWebsiteMax = 300;
+
+
+
+export const UpdateOrganizationResponse = zod.object({
+  "name": zod.string().min(updateOrganizationResponseOneNameMin).max(updateOrganizationResponseOneNameMax),
+  "description": zod.string().max(updateOrganizationResponseOneDescriptionMax),
+  "type": zod.enum(['business', 'agency', 'startup', 'enterprise', 'other']),
+  "country": zod.string().min(updateOrganizationResponseOneCountryMin).max(updateOrganizationResponseOneCountryMax),
+  "website": zod.string().max(updateOrganizationResponseOneWebsiteMax)
+}).and(zod.object({
+  "id": zod.string(),
+  "slug": zod.string(),
+  "description": zod.string(),
+  "website": zod.string(),
+  "ownerUserId": zod.string(),
+  "role": zod.enum(['owner', 'admin', 'member', 'viewer']),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string(),
+  "memberCount": zod.number().int(),
+  "pendingInvitationCount": zod.number().int()
+}))
+
+
+export const ListOrganizationMembersParams = zod.object({
+  "organizationId": zod.coerce.string()
+})
+
+export const ListOrganizationMembersResponseItem = zod.object({
+  "id": zod.string(),
+  "userId": zod.string(),
+  "displayName": zod.string(),
+  "role": zod.enum(['owner', 'admin', 'member', 'viewer']),
+  "status": zod.enum(['active']),
+  "joinedAt": zod.string()
+})
+export const ListOrganizationMembersResponse = zod.array(ListOrganizationMembersResponseItem)
+
+
+export const ChangeOrganizationRoleParams = zod.object({
+  "organizationId": zod.coerce.string(),
+  "userId": zod.coerce.string()
+})
+
+export const ChangeOrganizationRoleBody = zod.object({
+  "role": zod.enum(['admin', 'member', 'viewer'])
+})
+
+export const ChangeOrganizationRoleResponse = zod.object({
+  "ok": zod.boolean(),
+  "organizationId": zod.string()
+})
+
+
+export const RemoveOrganizationMemberParams = zod.object({
+  "organizationId": zod.coerce.string(),
+  "userId": zod.coerce.string()
+})
+
+export const RemoveOrganizationMemberResponse = zod.object({
+  "ok": zod.boolean(),
+  "organizationId": zod.string()
+})
+
+
+export const ListOrganizationInvitationsParams = zod.object({
+  "organizationId": zod.coerce.string()
+})
+
+export const ListOrganizationInvitationsResponseItem = zod.object({
+  "id": zod.string(),
+  "email": zod.string(),
+  "role": zod.enum(['admin', 'member', 'viewer']),
+  "status": zod.enum(['pending', 'accepted', 'revoked', 'expired']),
+  "createdAt": zod.string(),
+  "expiresAt": zod.string()
+})
+export const ListOrganizationInvitationsResponse = zod.array(ListOrganizationInvitationsResponseItem)
+
+
+export const InviteOrganizationMemberParams = zod.object({
+  "organizationId": zod.coerce.string()
+})
+
+export const inviteOrganizationMemberBodyEmailMax = 254;
+
+
+
+export const InviteOrganizationMemberBody = zod.object({
+  "email": zod.string().email().max(inviteOrganizationMemberBodyEmailMax),
+  "role": zod.enum(['admin', 'member', 'viewer'])
+})
+
+export const InviteOrganizationMemberResponse = zod.object({
+  "invitation": zod.object({
+  "id": zod.string(),
+  "email": zod.string(),
+  "role": zod.enum(['admin', 'member', 'viewer']),
+  "status": zod.enum(['pending', 'accepted', 'revoked', 'expired']),
+  "createdAt": zod.string(),
+  "expiresAt": zod.string()
+}),
+  "token": zod.string(),
+  "delivery": zod.enum(['manual'])
+})
+
+
+export const RevokeOrganizationInvitationParams = zod.object({
+  "organizationId": zod.coerce.string(),
+  "invitationId": zod.coerce.string()
+})
+
+export const RevokeOrganizationInvitationResponse = zod.object({
+  "ok": zod.boolean(),
+  "organizationId": zod.string()
+})
+
+
+export const LeaveOrganizationParams = zod.object({
+  "organizationId": zod.coerce.string()
+})
+
+export const LeaveOrganizationResponse = zod.object({
+  "ok": zod.boolean(),
+  "organizationId": zod.string()
+})
+
+
+export const TransferOrganizationOwnershipParams = zod.object({
+  "organizationId": zod.coerce.string()
+})
+
+export const transferOrganizationOwnershipBodyUserIdMax = 100;
+
+export const transferOrganizationOwnershipBodyConfirmationMax = 100;
+
+
+
+export const TransferOrganizationOwnershipBody = zod.object({
+  "userId": zod.string().max(transferOrganizationOwnershipBodyUserIdMax),
+  "confirmation": zod.string().max(transferOrganizationOwnershipBodyConfirmationMax)
+})
+
+export const TransferOrganizationOwnershipResponse = zod.object({
+  "ok": zod.boolean(),
+  "organizationId": zod.string()
+})
+
+
+export const ArchiveOrganizationParams = zod.object({
+  "organizationId": zod.coerce.string()
+})
+
+export const archiveOrganizationBodyConfirmationMax = 100;
+
+
+
+export const ArchiveOrganizationBody = zod.object({
+  "confirmation": zod.string().max(archiveOrganizationBodyConfirmationMax)
+})
+
+export const ArchiveOrganizationResponse = zod.object({
+  "ok": zod.boolean(),
+  "organizationId": zod.string()
+})
+
+
+export const ListOrganizationAuditParams = zod.object({
+  "organizationId": zod.coerce.string()
+})
+
+export const ListOrganizationAuditResponseItem = zod.object({
+  "id": zod.string(),
+  "action": zod.string(),
+  "actorName": zod.string(),
+  "createdAt": zod.string(),
+  "metadata": zod.record(zod.string(), zod.string())
+})
+export const ListOrganizationAuditResponse = zod.array(ListOrganizationAuditResponseItem)
+
+
+export const acceptOrganizationInvitationBodyTokenMin = 43;
+export const acceptOrganizationInvitationBodyTokenMax = 43;
+
+
+export const acceptOrganizationInvitationBodyTokenRegExp = new RegExp('^[A-Za-z0-9_-]+$');
+
+
+export const AcceptOrganizationInvitationBody = zod.object({
+  "token": zod.string().min(acceptOrganizationInvitationBodyTokenMin).max(acceptOrganizationInvitationBodyTokenMax).regex(acceptOrganizationInvitationBodyTokenRegExp)
+})
+
+export const AcceptOrganizationInvitationResponse = zod.object({
+  "ok": zod.boolean(),
+  "organizationId": zod.string()
+})
+
+
+export const getWorkspaceResponseOrganizationsItemOneNameMin = 2;
+export const getWorkspaceResponseOrganizationsItemOneNameMax = 100;
+
+export const getWorkspaceResponseOrganizationsItemOneDescriptionMax = 2000;
+
+export const getWorkspaceResponseOrganizationsItemOneCountryMin = 2;
+export const getWorkspaceResponseOrganizationsItemOneCountryMax = 80;
+
+export const getWorkspaceResponseOrganizationsItemOneWebsiteMax = 300;
+
+
+
+export const GetWorkspaceResponse = zod.object({
+  "organizations": zod.array(zod.object({
+  "name": zod.string().min(getWorkspaceResponseOrganizationsItemOneNameMin).max(getWorkspaceResponseOrganizationsItemOneNameMax),
+  "description": zod.string().max(getWorkspaceResponseOrganizationsItemOneDescriptionMax),
+  "type": zod.enum(['business', 'agency', 'startup', 'enterprise', 'other']),
+  "country": zod.string().min(getWorkspaceResponseOrganizationsItemOneCountryMin).max(getWorkspaceResponseOrganizationsItemOneCountryMax),
+  "website": zod.string().max(getWorkspaceResponseOrganizationsItemOneWebsiteMax)
+}).and(zod.object({
+  "id": zod.string(),
+  "slug": zod.string(),
+  "description": zod.string(),
+  "website": zod.string(),
+  "ownerUserId": zod.string(),
+  "role": zod.enum(['owner', 'admin', 'member', 'viewer']),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string(),
+  "memberCount": zod.number().int(),
+  "pendingInvitationCount": zod.number().int()
+}))),
+  "selectedOrganizationId": zod.string().nullable()
+})
+
+
+export const SelectWorkspaceBody = zod.object({
+  "organizationId": zod.string().nullable()
+})
+
+export const selectWorkspaceResponseOrganizationsItemOneNameMin = 2;
+export const selectWorkspaceResponseOrganizationsItemOneNameMax = 100;
+
+export const selectWorkspaceResponseOrganizationsItemOneDescriptionMax = 2000;
+
+export const selectWorkspaceResponseOrganizationsItemOneCountryMin = 2;
+export const selectWorkspaceResponseOrganizationsItemOneCountryMax = 80;
+
+export const selectWorkspaceResponseOrganizationsItemOneWebsiteMax = 300;
+
+
+
+export const SelectWorkspaceResponse = zod.object({
+  "organizations": zod.array(zod.object({
+  "name": zod.string().min(selectWorkspaceResponseOrganizationsItemOneNameMin).max(selectWorkspaceResponseOrganizationsItemOneNameMax),
+  "description": zod.string().max(selectWorkspaceResponseOrganizationsItemOneDescriptionMax),
+  "type": zod.enum(['business', 'agency', 'startup', 'enterprise', 'other']),
+  "country": zod.string().min(selectWorkspaceResponseOrganizationsItemOneCountryMin).max(selectWorkspaceResponseOrganizationsItemOneCountryMax),
+  "website": zod.string().max(selectWorkspaceResponseOrganizationsItemOneWebsiteMax)
+}).and(zod.object({
+  "id": zod.string(),
+  "slug": zod.string(),
+  "description": zod.string(),
+  "website": zod.string(),
+  "ownerUserId": zod.string(),
+  "role": zod.enum(['owner', 'admin', 'member', 'viewer']),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string(),
+  "memberCount": zod.number().int(),
+  "pendingInvitationCount": zod.number().int()
+}))),
+  "selectedOrganizationId": zod.string().nullable()
+})
+
+
 /**
  * @summary Initialize and retrieve own profile
  */

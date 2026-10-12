@@ -5,6 +5,190 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+export type OrganizationRole = typeof OrganizationRole[keyof typeof OrganizationRole];
+
+
+export const OrganizationRole = {
+  owner: 'owner',
+  admin: 'admin',
+  member: 'member',
+  viewer: 'viewer',
+} as const;
+
+export type OrganizationInputType = typeof OrganizationInputType[keyof typeof OrganizationInputType];
+
+
+export const OrganizationInputType = {
+  business: 'business',
+  agency: 'agency',
+  startup: 'startup',
+  enterprise: 'enterprise',
+  other: 'other',
+} as const;
+
+export interface OrganizationInput {
+  /**
+     * @minLength 2
+     * @maxLength 100
+     */
+  name: string;
+  /** @maxLength 2000 */
+  description?: string;
+  type: OrganizationInputType;
+  /**
+     * @minLength 2
+     * @maxLength 80
+     */
+  country: string;
+  /** @maxLength 300 */
+  website?: string;
+}
+
+export type Organization = OrganizationInput & {
+  id: string;
+  slug: string;
+  description: string;
+  website: string;
+  ownerUserId: string;
+  role: OrganizationRole;
+  createdAt: string;
+  updatedAt: string;
+  memberCount: number;
+  pendingInvitationCount: number;
+};
+
+export type OrganizationMemberStatus = typeof OrganizationMemberStatus[keyof typeof OrganizationMemberStatus];
+
+
+export const OrganizationMemberStatus = {
+  active: 'active',
+} as const;
+
+export interface OrganizationMember {
+  id: string;
+  userId: string;
+  displayName: string;
+  role: OrganizationRole;
+  status: OrganizationMemberStatus;
+  joinedAt: string;
+}
+
+export type MembershipRoleInputRole = typeof MembershipRoleInputRole[keyof typeof MembershipRoleInputRole];
+
+
+export const MembershipRoleInputRole = {
+  admin: 'admin',
+  member: 'member',
+  viewer: 'viewer',
+} as const;
+
+export interface MembershipRoleInput {
+  role: MembershipRoleInputRole;
+}
+
+export type InvitationInputRole = typeof InvitationInputRole[keyof typeof InvitationInputRole];
+
+
+export const InvitationInputRole = {
+  admin: 'admin',
+  member: 'member',
+  viewer: 'viewer',
+} as const;
+
+export interface InvitationInput {
+  /** @maxLength 254 */
+  email: string;
+  role: InvitationInputRole;
+}
+
+export type OrganizationInvitationRole = typeof OrganizationInvitationRole[keyof typeof OrganizationInvitationRole];
+
+
+export const OrganizationInvitationRole = {
+  admin: 'admin',
+  member: 'member',
+  viewer: 'viewer',
+} as const;
+
+export type OrganizationInvitationStatus = typeof OrganizationInvitationStatus[keyof typeof OrganizationInvitationStatus];
+
+
+export const OrganizationInvitationStatus = {
+  pending: 'pending',
+  accepted: 'accepted',
+  revoked: 'revoked',
+  expired: 'expired',
+} as const;
+
+export interface OrganizationInvitation {
+  id: string;
+  email: string;
+  role: OrganizationInvitationRole;
+  status: OrganizationInvitationStatus;
+  createdAt: string;
+  expiresAt: string;
+}
+
+export type InvitationCreatedDelivery = typeof InvitationCreatedDelivery[keyof typeof InvitationCreatedDelivery];
+
+
+export const InvitationCreatedDelivery = {
+  manual: 'manual',
+} as const;
+
+export interface InvitationCreated {
+  invitation: OrganizationInvitation;
+  token: string;
+  delivery: InvitationCreatedDelivery;
+}
+
+export interface InvitationAcceptanceInput {
+  /**
+     * @minLength 43
+     * @maxLength 43
+     * @pattern ^[A-Za-z0-9_-]+$
+     */
+  token: string;
+}
+
+export interface OwnershipTransferInput {
+  /** @maxLength 100 */
+  userId: string;
+  /** @maxLength 100 */
+  confirmation: string;
+}
+
+export interface OrganizationArchiveInput {
+  /** @maxLength 100 */
+  confirmation: string;
+}
+
+export interface OrganizationAction {
+  ok: boolean;
+  organizationId: string;
+}
+
+export interface WorkspaceInput {
+  /** @nullable */
+  organizationId: string | null;
+}
+
+export interface Workspace {
+  organizations: Organization[];
+  /** @nullable */
+  selectedOrganizationId: string | null;
+}
+
+export type OrganizationAuditMetadata = {[key: string]: string};
+
+export interface OrganizationAudit {
+  id: string;
+  action: string;
+  actorName: string;
+  createdAt: string;
+  metadata: OrganizationAuditMetadata;
+}
+
 export type ProfileInputAccountType = typeof ProfileInputAccountType[keyof typeof ProfileInputAccountType];
 
 

@@ -1,0 +1,345 @@
+# AGENTNEX — PROMPT 2
+## Real Organizations, Team Management, Multi-Tenant Architecture & Role-Based Access Control
+
+You are continuing development of the EXISTING AGENTNEX application.
+
+Prompt 1 has already established the application foundation, premium interface, Clerk authentication, PostgreSQL database, user profiles, onboarding, dashboard, and settings.
+
+**Do not rebuild the application, restart from scratch, replace the working stack, reset the database, or unnecessarily redesign completed pages.**
+
+Your goal is to implement a secure, professional, and fully functional organization management system that will support the future AGENTNEX global business and AI agent ecosystem.
+
+I will attach AGENTNEX design reference images. Use them to guide the visual quality, layout, colors, typography, spacing, and interactions for the new organization-related screens.
+
+The reference images show the long-term product vision. Do not invent live organizations, employees, statistics, network activity, or future functionality.
+
+---
+
+## 1. FIRST — INSPECT EXISTING IMPLEMENTATION
+
+Before making changes:
+
+- Inspect the current architecture, database schema, authentication system, user profiles, navigation, and organization-related routes.
+- Reuse existing working components and infrastructure.
+- Identify which organization-related capabilities already exist.
+- Extend the application rather than duplicating or replacing systems.
+- Preserve all existing user accounts, onboarding records, settings, and dashboard functionality.
+- Use the existing Clerk identity model consistently.
+
+Do not spend time rebuilding completed Prompt 1 features.
+
+## 2. REAL ORGANIZATION MANAGEMENT
+
+Implement complete database-backed organization management.
+
+Authenticated users must be able to:
+
+- Create an organization.
+- Enter its name and optional description.
+- Choose organization type, such as Business, Agency, Startup, Enterprise, or Other.
+- Select country and optional website.
+- Upload an organization logo if supported by the configured storage system.
+- View organization details.
+- Update organization information when authorized.
+- View organizations they belong to.
+- Switch between their organizations.
+- Leave an organization when permitted.
+
+Create stable unique organization identifiers and URL-safe slugs.
+
+Validate submitted information and ensure duplicate names are handled appropriately without breaking account initialization.
+
+A user may belong to multiple organizations.
+
+A user with no organization must still be able to use their personal dashboard.
+
+Do not automatically create fictional organizations.
+
+## 3. SECURE MULTI-TENANT DATABASE
+
+Extend the existing PostgreSQL database with appropriate models for:
+
+- Organizations
+- Organization memberships
+- Organization invitations
+- Organization settings where necessary
+- Organization-related audit events
+
+Include appropriate timestamps, statuses, foreign keys, indexes, and uniqueness constraints.
+
+Requirements:
+
+- Each organization has a valid owner membership.
+- Membership records connect real authenticated users with real organizations.
+- Duplicate memberships must be prevented.
+- Database migrations must preserve existing data.
+- Related write operations should be transactional where consistency requires it.
+- Organization queries must be scoped to authorized members.
+- Organization data must never leak between unrelated organizations.
+
+Follow existing database conventions and avoid unnecessary schema complexity.
+
+## 4. ROLE-BASED ACCESS CONTROL (RBAC)
+
+Implement real server-enforced organization permissions.
+
+Use these roles:
+
+**Owner**
+- Full organization control
+- Manage settings and members
+- Change member roles
+- Transfer ownership
+- Delete the organization when explicitly confirmed
+
+**Admin**
+- Manage authorized organization settings
+- Invite and manage eligible team members
+- Access organization management features
+- Cannot perform owner-only operations
+
+**Member**
+- Access permitted organization content
+- Update their own membership-related profile where supported
+- Cannot manage organization security, ownership, or administrative roles
+
+**Viewer**
+- Read-only access to permitted organization information
+- Cannot modify organization data or manage members
+
+Create a centralized permission-checking mechanism.
+
+**Never enforce permissions through frontend button visibility alone.**
+
+Every protected API operation and database mutation must verify the authenticated user's actual membership and role on the server.
+
+Prevent privilege escalation and cross-organization access.
+
+## 5. TEAM MANAGEMENT & INVITATIONS
+
+Build a functioning team management page.
+
+Authorized users must be able to:
+
+- View real organization members.
+- See each member's role and membership status.
+- Invite members.
+- Choose permitted invitation roles.
+- View pending invitations.
+- Revoke pending invitations.
+- Remove members when authorized.
+- Change member roles within permitted boundaries.
+
+Invitations must be secure:
+
+- Use cryptographically secure invitation tokens.
+- Store tokens securely, preferably hashed.
+- Enforce expiration and single-use acceptance.
+- Bind invitations to their intended recipient identity.
+- Prevent unauthorized acceptance.
+- Prevent duplicates and invitation replay.
+- Ensure acceptance is transactional.
+
+Use a configured email delivery provider if one is already available.
+
+If email delivery is not configured, provide a secure copyable invitation link with clear manual-sharing instructions. Do not pretend an email was sent.
+
+An invited user must authenticate before accepting.
+
+## 6. OWNERSHIP & SAFETY RULES
+
+Implement safe ownership management.
+
+- An organization must never accidentally be left without an owner.
+- The final owner cannot simply leave or be removed.
+- Ownership transfer requires an explicit, authorized action.
+- Admins cannot promote themselves to owner.
+- Members cannot elevate their own permissions.
+- Users cannot modify memberships in organizations they do not belong to.
+- Deletion requires explicit confirmation and must respect dependent records.
+
+Do not silently delete organizations or user data.
+
+If permanent organization deletion would create unnecessary risk at this stage, implement a clearly documented restricted or soft-delete strategy instead.
+
+## 7. PREMIUM ORGANIZATION UI/UX
+
+Use the attached AGENTNEX images as the primary visual reference for these pages.
+
+Create polished, responsive interfaces for:
+
+1. My Organizations
+2. Create Organization
+3. Organization Overview
+4. Organization Profile & Settings
+5. Team Members
+6. Invite Team Member
+7. Pending Invitations
+8. Role Management
+
+Visual standards:
+
+- Premium dark navy styling with blue/cyan highlights and limited orange accents.
+- Modern enterprise SaaS layouts.
+- Professional tables, cards, forms, dialogs, and icons.
+- Smooth and restrained animations.
+- Excellent typography and spacing.
+- Responsive desktop, tablet, and mobile views.
+- Consistency with the existing AGENTNEX design system.
+- Support the existing dark/light theme.
+
+Each page should look appropriate to its purpose.
+
+**Do not repeat the decorative globe across every screen.**
+
+Use real records in all tables and summaries.
+
+If no organizations, members, or invitations exist, show useful empty states and relevant actions.
+
+Do not create fake companies, fake activity feeds, fake user avatars, or fabricated metrics.
+
+## 8. DASHBOARD INTEGRATION
+
+Integrate the organization system into the existing dashboard.
+
+Implement:
+
+- Organization switcher
+- Personal workspace context
+- Organization overview entry point
+- Real organization name and membership role
+- Navigation to organization management
+- Accurate empty states
+
+The selected organization context must be validated server-side and must not grant permissions by itself.
+
+Preserve all existing dashboard widgets, user preferences, and profile functionality.
+
+Do not break personal-account functionality.
+
+## 9. AUDITABILITY & SECURITY
+
+Record meaningful organization administrative actions, such as:
+
+- Organization created
+- Member invited
+- Invitation accepted or revoked
+- Role changed
+- Member removed
+- Ownership transferred
+- Organization settings changed
+
+Audit entries must reflect real actions, not generated examples.
+
+Do not expose invitation tokens, credentials, or confidential data in logs.
+
+Ensure authorization and validation remain effective even when API endpoints are called directly.
+
+## 10. FUTURE INTEGRATION READINESS
+
+Design this organization system to support future AGENTNEX modules, including:
+
+- Business Network
+- AI Agent ownership
+- Agent Passport
+- Trust and verification
+- Procurement
+- Workflow approvals
+- Marketplace
+- Billing
+- Developer APIs
+
+Do not implement those future modules in this prompt.
+
+Create only the clean ownership, membership, and permission foundations they will need.
+
+## 11. REQUIRED TESTING
+
+Test the new functionality before declaring completion.
+
+Required scenarios:
+
+1. Authenticated user creates an organization.
+2. Organization data persists after reload.
+3. User can view and switch between their organizations.
+4. Personal dashboard works without an organization.
+5. Organization updates respect permissions.
+6. Owner and Admin permissions behave correctly.
+7. Member and Viewer restrictions are enforced.
+8. Unauthorized users cannot access another organization's records.
+9. Duplicate memberships are prevented.
+10. Invitation acceptance works securely.
+11. Expired, revoked, reused, or unauthorized invitations are rejected.
+12. Role escalation attempts are rejected.
+13. Last-owner protection works.
+14. Ownership transfer follows authorization rules.
+15. Existing Prompt 1 account, profile, settings, and dashboard functionality remains intact.
+16. New pages work on desktop and mobile.
+17. TypeScript, lint, and production build pass.
+
+Use automated tests wherever practical, preferably with isolated fixtures and rollback/cleanup so real user data is not polluted.
+
+If an external provider prevents a particular test, report it as NOT VERIFIED rather than claiming success.
+
+Fix genuine Phase 2 implementation errors before finishing.
+
+## 12. CREDIT-EFFICIENT EXECUTION
+
+This project has a limited development budget.
+
+Work efficiently:
+
+- Inspect before modifying.
+- Reuse current components.
+- Avoid installing unnecessary dependencies.
+- Avoid repeatedly rewriting the same screens.
+- Avoid unrelated feature development.
+- Avoid broad redesigns of Prompt 1 pages.
+- Run targeted tests during development and a final relevant regression pass.
+- Preserve working functionality.
+- Ask for user input only when an external credential, paid service, or irreversible decision genuinely requires it.
+
+Do not sacrifice security or correctness to reduce development time.
+
+## 13. REQUIRED COMPLETION REPORT
+
+When finished, provide a concise report:
+
+**A. Implemented functionality**
+Explain what was actually built.
+
+**B. New and updated pages**
+List the routes and their working capabilities.
+
+**C. Database changes**
+Summarize models, migrations, and data preservation.
+
+**D. RBAC security**
+Explain how server-side authorization is enforced.
+
+**E. Testing**
+Provide PASS / FAIL / NOT VERIFIED outcomes based on actual execution.
+
+**F. Remaining limitations**
+Identify incomplete integrations, external verification requirements, or known defects.
+
+**G. Phase 3 readiness**
+Explain whether the organization system is ready to support AI Agent Passport development.
+
+## FINAL INSTRUCTIONS
+
+Build a genuine multi-tenant organization system, not a static demonstration.
+
+Every implemented action must use real authenticated identities, validated server-side operations, and persistent database records.
+
+The attached images define the desired visual quality, but no image content should be treated as proof of real underlying activity.
+
+Preserve Prompt 1.
+
+Do not create fake functionality.
+
+Do not reset existing user data.
+
+Do not start Prompt 3.
+
+Finish Prompt 2 with real testing and an accurate completion report.

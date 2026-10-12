@@ -28,7 +28,7 @@ The Global Network for AI Agents, Businesses & People — Phase 1 identity and p
 - `artifacts/api-server/src/routes/me.ts` — authenticated own-account endpoints
 - `artifacts/api-server/src/lib/profile-service.ts` — idempotent initialization and completion rules
 - `lib/api-spec/openapi.yaml` — API contract; regenerate clients after edits
-- `lib/db/src/schema/profiles.ts` — current schema
+- `lib/db/src/schema/` — profile and organization/membership/invitation/audit/context models
 - `lib/db/drizzle/` — versioned SQL schema history; development schema applied through Drizzle push
 - `docs/architecture.md` — extension conventions and security boundaries
 
@@ -36,22 +36,26 @@ The Global Network for AI Agents, Businesses & People — Phase 1 identity and p
 
 - React/Vite selected explicitly by the user instead of the brief's preferred Next.js. One Express backend avoids mixing stacks.
 - Clerk owns registration, sessions, logout and account recovery. App records use immutable Clerk user IDs, never email as identity.
-- Personal accounts have no organization dependency. Future features remain truthful roadmap screens.
+- Personal accounts have no organization dependency. Database memberships govern organization access; other future features remain truthful roadmap screens.
 - Public theme preferences use local storage; signed-in preferences are stored in PostgreSQL.
 
 ## Product
 
 Phase 1: public ecosystem explanation, account access, resumable onboarding, profile editing, personal progress dashboard, saved widget preferences and settings.
 
+Phase 2: real organizations, scoped membership roles, verified-recipient manual invitation
+links, saved workspace context, ownership transfer, retained-record archiving and real
+administrative audit history. See `docs/phase2-audit.md` for executed checks and limits.
+
 ## User preferences
 
-The reference image describes the future vision. Do not fabricate metrics, customers, listings, activity, transactions or AI execution. Do not start Prompt 2 until requested.
+The reference image describes the future vision. Do not fabricate metrics, customers, listings, activity, transactions or AI execution. Prompt 2 is authorized; do not start Prompt 3 until requested.
 
 ## Gotchas
 
 - All private endpoints derive ownership exclusively from the authenticated session. Never accept a user ID from request bodies.
 - Do not run schema DDL or seed data on server startup. Publishing manages the production schema separately.
-- Tests use temporary randomly named test profiles, and clean up only those profiles.
+- Tests use randomly named isolated fixtures; clean up only exact test records, never existing user data.
 
 ## Pointers
 

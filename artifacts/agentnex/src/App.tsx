@@ -21,6 +21,12 @@ import ProfilePage from "@/pages/profile";
 import SettingsPage from "@/pages/settings";
 import ModulePage from "@/pages/module";
 import NotFound from "@/pages/not-found";
+import OrganizationsPage from "@/pages/organizations";
+import OrganizationNewPage from "@/pages/organization-new";
+import OrganizationOverviewPage from "@/pages/organization-overview";
+import OrganizationSettingsPage from "@/pages/organization-settings";
+import OrganizationTeamPage from "@/pages/organization-team";
+import InvitePage from "@/pages/invite";
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 1, refetchOnWindowFocus: false } } });
 
@@ -141,11 +147,15 @@ function HomeRedirect() {
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const { isLoaded } = useAuth();
+  const [location] = useLocation();
+  const signInTarget = location === "/invite"
+    ? `/sign-in?returnTo=${encodeURIComponent(location + window.location.search)}`
+    : "/sign-in";
   if (!isLoaded) return <Splash />;
   return (
     <>
       <Show when="signed-in">{children}</Show>
-      <Show when="signed-out"><Redirect to="/sign-in" /></Show>
+      <Show when="signed-out"><Redirect to={signInTarget} /></Show>
     </>
   );
 }
@@ -159,6 +169,11 @@ function inShell(Page: ComponentType) {
 const DashboardRoute = inShell(Dashboard);
 const ProfileRoute = inShell(ProfilePage);
 const SettingsRoute = inShell(SettingsPage);
+const OrganizationsRoute = inShell(OrganizationsPage);
+const OrganizationNewRoute = inShell(OrganizationNewPage);
+const OrganizationOverviewRoute = inShell(OrganizationOverviewPage);
+const OrganizationSettingsRoute = inShell(OrganizationSettingsPage);
+const OrganizationTeamRoute = inShell(OrganizationTeamPage);
 const OnboardingRoute = () => <RequireAuth><Onboarding /></RequireAuth>;
 const MODULE_ROUTES = NAV.filter((n) => !n.live).map((n) => ({
   path: n.href,
@@ -202,6 +217,12 @@ function ClerkProviderWithRoutes() {
               <Route path="/dashboard" component={DashboardRoute} />
               <Route path="/profile" component={ProfileRoute} />
               <Route path="/settings" component={SettingsRoute} />
+              <Route path="/organizations" component={OrganizationsRoute} />
+              <Route path="/organizations/new" component={OrganizationNewRoute} />
+              <Route path="/organizations/:organizationId/settings" component={OrganizationSettingsRoute} />
+              <Route path="/organizations/:organizationId/team" component={OrganizationTeamRoute} />
+              <Route path="/organizations/:organizationId" component={OrganizationOverviewRoute} />
+              <Route path="/invite" component={InvitePage} />
               {MODULE_ROUTES.map((r) => <Route key={r.path} path={r.path} component={r.component} />)}
               <Route component={NotFound} />
             </Switch>

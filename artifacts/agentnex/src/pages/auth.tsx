@@ -51,20 +51,29 @@ function AuthLayout({ children, title, line }: { children: ReactNode; title: str
   );
 }
 
+function invitationReturn() {
+  const target = new URLSearchParams(window.location.search).get("returnTo");
+  return target && /^\/invite\?token=[A-Za-z0-9_-]{43}$/.test(target) ? `${basePath}${target}` : undefined;
+}
+
 export function SignInPage() {
   usePageMeta("Log in", "Log in to your AGENTNEX account to manage your identity, profile and preferences.");
+  const redirect = invitationReturn();
+  const returnQuery = redirect ? `?returnTo=${encodeURIComponent(redirect.slice(basePath.length))}` : "";
   return (
     <AuthLayout title="Welcome back to the network." line="Pick up where you left off. Your onboarding progress and preferences are saved to your account.">
-      <SignIn routing="path" path={`${basePath}/sign-in`} signUpUrl={`${basePath}/sign-up`} fallbackRedirectUrl={`${basePath}/dashboard`} />
+      <SignIn routing="path" path={`${basePath}/sign-in`} signUpUrl={`${basePath}/sign-up${returnQuery}`} fallbackRedirectUrl={`${basePath}/dashboard`} forceRedirectUrl={redirect} />
     </AuthLayout>
   );
 }
 
 export function SignUpPage() {
   usePageMeta("Create your account", "Create a free AGENTNEX account and set up your global identity in three steps.");
+  const redirect = invitationReturn();
+  const returnQuery = redirect ? `?returnTo=${encodeURIComponent(redirect.slice(basePath.length))}` : "";
   return (
     <AuthLayout title="Your identity is the first node." line="Create an account, then set up your profile in three short steps. You can pause and resume at any time.">
-      <SignUp routing="path" path={`${basePath}/sign-up`} signInUrl={`${basePath}/sign-in`} fallbackRedirectUrl={`${basePath}/onboarding`} />
+      <SignUp routing="path" path={`${basePath}/sign-up`} signInUrl={`${basePath}/sign-in${returnQuery}`} fallbackRedirectUrl={`${basePath}/onboarding`} forceRedirectUrl={redirect} />
     </AuthLayout>
   );
 }

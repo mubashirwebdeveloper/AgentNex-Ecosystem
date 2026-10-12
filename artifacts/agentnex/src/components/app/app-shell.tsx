@@ -4,6 +4,7 @@ import { useClerk, useUser } from "@clerk/react";
 import { Bell, ChevronsLeft, LogOut, Menu, Search, Settings, UserRound, Compass, BellOff } from "lucide-react";
 import { Logo, LogoMark } from "@/components/brand/logo";
 import { ThemeToggle } from "./theme-sync";
+import { WorkspaceSwitcher } from "@/components/org/org-ui";
 import { NAV, EXTRA_SEARCH, type NavItem } from "@/lib/nav";
 import { useMe } from "@/hooks/use-account";
 import { cn } from "@/lib/utils";
@@ -31,7 +32,7 @@ function SidebarNav({ collapsed, onNavigate }: { collapsed: boolean; onNavigate?
           {!collapsed && <p className="mb-1.5 px-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/70">{g}</p>}
           <ul className="space-y-0.5">
             {NAV.filter((n) => n.group === g).map((n) => (
-              <li key={n.slug}><SideLink item={n} active={location === n.href} collapsed={collapsed} onNavigate={onNavigate} /></li>
+              <li key={n.slug}><SideLink item={n} active={location === n.href || (n.href !== "/dashboard" && location.startsWith(n.href + "/"))} collapsed={collapsed} onNavigate={onNavigate} /></li>
             ))}
           </ul>
         </div>
@@ -137,6 +138,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <button type="button" className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground md:hidden" onClick={() => setMobileOpen(true)} aria-label="Open navigation" data-testid="button-mobile-menu">
             <Menu className="h-5 w-5" aria-hidden />
           </button>
+          <WorkspaceSwitcher />
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
